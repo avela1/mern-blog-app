@@ -16,8 +16,10 @@ app.get("/", (req, res) => {
   res.send("Hello World!!!");
 });
 
+const port = process.env.PORT || 8080;
+// app.listen(port, () => console.log(`listening from port ${port}`));
+
 // Connect to atlass db and start server
-const port = process.env.PORT || 8000;
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -28,8 +30,6 @@ mongoose
     app.listen(port, () => console.log(`listening from port ${port}`));
   })
   .catch((err) => console.log(err));
-
-
 
 // const articlesInfo = {
 //   "learn-react": {
