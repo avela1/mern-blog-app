@@ -3,7 +3,7 @@ const articlesSchema = mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: true, 
     },
     name: {
       type: String,
@@ -26,3 +26,5 @@ const articlesSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+module.exports = mongoose.model("Article", articlesSchema);

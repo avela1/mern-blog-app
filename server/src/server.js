@@ -2,6 +2,10 @@ const dotenv = require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const expressValidator = require("express-validator");
+// const morgan = require("morgan");
+
+const routes = require("./routes/articlesRoute");
 
 const app = express();
 
@@ -9,15 +13,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(expressValidator());
+// app.use(morgan("start"));
 
 // Routes
-
-app.get("/", (req, res) => {
-  res.send("Hello World!!!");
-});
+app.use("/", routes);
 
 const port = process.env.PORT || 8080;
-// app.listen(port, () => console.log(`listening from port ${port}`));
 
 // Connect to atlass db and start server
 mongoose.set("strictQuery", false);
@@ -30,24 +32,6 @@ mongoose
     app.listen(port, () => console.log(`listening from port ${port}`));
   })
   .catch((err) => console.log(err));
-
-// const articlesInfo = {
-//   "learn-react": {
-//     comments: [],
-//   },
-//   "learn-flutter": {
-//     comments: [],
-//   },
-//   "learn-nodejs": {
-//     comments: [],
-//   },
-//   "learn-mongodb": {
-//     comments: [],
-//   },
-//   "learn-tailwindcss": {
-//     comments: [],
-//   },
-// };
 
 // app.get("/api/articles/:name", async (req, res) => {
 //   try {
